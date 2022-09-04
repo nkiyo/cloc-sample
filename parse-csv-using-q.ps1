@@ -7,4 +7,6 @@ $pre = "7ad2c1"
 $post = "d468b6"
 
 $csv = $(cloc --diff $pre $post --csv --by-file --quiet) 
-$csv | q -d "," -H -O -T 'SELECT "File", `== blank`, `+ blank` FROM - ;'
+#$csv
+#$csv | q -d "," -H -O -T 'SELECT `File`, `!= code`, `+ code`, `- code` FROM - ;'
+$csv | q -d "," -H -T 'SELECT SUM(`!= code` + `+ code` + `- code`) FROM - ;'
