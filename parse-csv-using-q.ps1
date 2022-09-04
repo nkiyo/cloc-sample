@@ -9,4 +9,6 @@ $post = "d468b6"
 $csv = $(cloc --diff $pre $post --csv --by-file --quiet) 
 #$csv
 #$csv | q -d "," -H -O -T 'SELECT `File`, `!= code`, `+ code`, `- code` FROM - ;'
-$csv | q -d "," -H -T 'SELECT SUM(`!= code` + `+ code` + `- code`) FROM - ;'
+#$csv | q -d "," -H -T 'SELECT SUM(`!= code` + `+ code` + `- code`) FROM - ;'
+$csv | q -d "," -H -T 'SELECT SUM(`!= code`), SUM(`+ code`), SUM(`- code`) FROM - ;'
+# TODO tab区切りの3つの値を、変数に展開する方法？
